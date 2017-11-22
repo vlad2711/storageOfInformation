@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 public class Utils {
     public static ArrayList<String> sNotations = new ArrayList<>();
-    public static boolean isSQL = true;
+    public static boolean isSQL = false;
 }
