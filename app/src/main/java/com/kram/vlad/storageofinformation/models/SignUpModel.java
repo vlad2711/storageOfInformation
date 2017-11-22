@@ -5,8 +5,12 @@ package com.kram.vlad.storageofinformation.models;
  */
 
 public class SignUpModel {
+
     private String mName;
     private LogInModel mLogInModel;
+
+    public SignUpModel() {
+    }
 
     public int getIslandId() {
         return mIslandId;

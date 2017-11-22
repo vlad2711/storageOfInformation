@@ -16,7 +16,9 @@
         </activity>
         <activity android:name=".activitys.SignUpActivity">
         </activity>
-        <activity android:name=".activitys.HelloActivity">
+        <activity android:name=".activitys.NotationListActivity">
+        </activity>
+        <activity android:name=".activitys.AddNotationsActivity">
         </activity>
     </application>
 

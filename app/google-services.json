@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "741290697702",
+    "firebase_url": "https://storageofinformation-27c55.firebaseio.com",
+    "project_id": "storageofinformation-27c55",
+    "storage_bucket": "storageofinformation-27c55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741290697702:android:a61cf25b4bbf6cd3",
+        "android_client_info": {
+          "package_name": "com.kram.vlad.storageofinformation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741290697702-dt7idl6ml84ugd5mntjfhck4ce0885ol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kram.vlad.storageofinformation",
+            "certificate_hash": "190ed6209c3c3b2f602407689892f98c17c396f4"
+          }
+        },
+        {
+          "client_id": "741290697702-92s3llfg4hpirqo1pmdfifi40guba87r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9scSQnxVM-XK4F-EJWavozKO-SjgbxHs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741290697702-92s3llfg4hpirqo1pmdfifi40guba87r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,9 @@ public class LogInModel {
         mPassword = password;
     }
 
+    public LogInModel() {
+    }
+
     public String getEmail() {
         return mEmail;
     }

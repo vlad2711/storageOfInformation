@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StorageOfInformation</string>
+    <string name="wrong_password_message">Wrong email or password.</string>
 </resources>
