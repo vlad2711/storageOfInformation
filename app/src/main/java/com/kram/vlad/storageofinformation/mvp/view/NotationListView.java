@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallack;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.base.MvpPresenter;
+import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 14.11.2017.

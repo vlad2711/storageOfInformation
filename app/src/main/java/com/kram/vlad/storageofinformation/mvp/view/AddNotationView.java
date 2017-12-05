@@ -6,6 +6,7 @@ import com.kram.vlad.storageofinformation.callbacks.NotationCountCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.models.NotationsModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.base.MvpPresenter;
+import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 15.11.2017.

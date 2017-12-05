@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kram.vlad.storageofinformation.models.SignUpModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.base.MvpPresenter;
+import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 import java.util.ArrayList;
 

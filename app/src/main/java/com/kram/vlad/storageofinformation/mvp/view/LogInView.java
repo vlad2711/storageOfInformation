@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.base.MvpPresenter;
+import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 13.11.2017.

@@ -1,6 +1,6 @@
 package com.kram.vlad.storageofinformation.mvp.presenters.base;
 
-import com.kram.vlad.storageofinformation.mvp.view.MvpView;
+import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 public interface MvpPresenter<V extends MvpView> {
  
