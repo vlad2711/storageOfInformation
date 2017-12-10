@@ -3,8 +3,9 @@ package com.kram.vlad.storageofinformation.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,25 +20,29 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddNotationsActivity extends AppCompatActivity implements AddNotationView.View, NotationCountCallback{
+public class AddNotationsActivity extends AppCompatActivity implements AddNotationView.View, NotationCountCallback {
+
+    @BindView(R.id.add) ImageView mAdd;
+    @BindView(R.id.toolbar2) Toolbar mToolbar;
+    @BindView(R.id.notations) EditText mNotations;
 
     private LogInModel mLogInModel;
     private AddNotationPresenter mAddNotationPresenter;
-
-    @BindView(R.id.notations) EditText mNotations;
-    @BindView(R.id.add) Button mAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notations);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+
         presenterInit();
         getLogInModelFromIntent();
 
     }
 
-    private void presenterInit(){
+    private void presenterInit() {
         mAddNotationPresenter = new AddNotationPresenter();
         mAddNotationPresenter.attachView(this);
         mAddNotationPresenter.viewIsReady();
@@ -45,12 +50,6 @@ public class AddNotationsActivity extends AppCompatActivity implements AddNotati
 
     private void getLogInModelFromIntent() {
         mLogInModel = new Gson().fromJson(getIntent().getStringExtra("login"), LogInModel.class);
-    }
-
-    @OnClick(R.id.add)
-    public void onViewClicked() {
-        if(mLogInModel != null)
-        mAddNotationPresenter.getNotationCount(mLogInModel, this);
     }
 
     @Override
@@ -82,9 +81,15 @@ public class AddNotationsActivity extends AppCompatActivity implements AddNotati
 
     @Override
     public void onNotationCount(long count) {
-        if(mLogInModel != null) mAddNotationPresenter.onAdd(this,
+        if (mLogInModel != null) mAddNotationPresenter.onAdd(this,
                 new NotationsModel(mLogInModel, mNotations.getText().toString(),
-                    (count + 1)));
+                        (count + 1)));
 
+        close();
+    }
+
+    @OnClick(R.id.add)
+    public void onAddClicked() {
+        mAddNotationPresenter.getNotationCount(mLogInModel, this);
     }
 }

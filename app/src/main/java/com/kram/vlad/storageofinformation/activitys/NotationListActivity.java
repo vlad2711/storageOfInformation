@@ -6,8 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.kram.vlad.storageofinformation.R;
@@ -32,15 +32,18 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
     private LogInModel mLogInModel;
     private NotationListPresenter mNotationListPresenter;
 
-    @BindView(R.id.logOut) Button mLogOut;
+    @BindView(R.id.toolbar4) Toolbar mToolbar;
     @BindView(R.id.floatingActionButton2) FloatingActionButton mFloatingActionButton;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello);
+        setContentView(R.layout.activity_note_list);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+
         presenterInit();
         getLogInModelFromIntent();
 
@@ -51,14 +54,14 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
 
     }
 
-    private void presenterInit(){
+    private void presenterInit() {
         mNotationListPresenter = new NotationListPresenter();
         mNotationListPresenter.attachView(this);
         mNotationListPresenter.viewIsReady();
     }
 
     @OnClick(R.id.logOut)
-    public void onViewClicked() {
+    public void onLogOutClicked() {
         mNotationListPresenter.pushIsLoginToPreferences(this, false);
         close();
     }
@@ -96,8 +99,8 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
     }
 
     private void initializeRecyclerView() {
-        mNotationListPresenter.downloadNotations(this,mLogInModel, this, 1, 10);
-        mNotationRecyclerViewAdapter = new NotationRecyclerViewAdapter(this,mLogInModel,
+        mNotationListPresenter.downloadNotations(this, mLogInModel, this, 1, 10);
+        mNotationRecyclerViewAdapter = new NotationRecyclerViewAdapter(this, mLogInModel,
                 1, 10, this,
                 mNotationListPresenter);
 

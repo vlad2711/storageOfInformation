@@ -48,6 +48,8 @@ public class FirebaseHelper {
         });
     }
 
+
+
     public void getUser(LogInModel logInModel, LogInCallback logInCallback){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("users").child(logInModel.getEmail());

@@ -7,24 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".activitys.AddNotationsActivity">
 
+
     <EditText
         android:id="@+id/notations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/toolbar2"
         android:ems="10"
-        android:hint="Notation"
+        android:hint="Note"
         android:inputType="textMultiLine"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="16dp"/>
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/notations"
-        android:text="Add"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_done_white_24dp"/>
+
+    </android.support.v7.widget.Toolbar>>
 
 </RelativeLayout>

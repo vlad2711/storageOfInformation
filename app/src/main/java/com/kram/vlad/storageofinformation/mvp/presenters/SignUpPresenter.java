@@ -2,6 +2,7 @@ package com.kram.vlad.storageofinformation.mvp.presenters;
 
 import android.content.Context;
 
+import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
 import com.kram.vlad.storageofinformation.mvp.model.files.AssetReader;
@@ -11,6 +12,7 @@ import com.kram.vlad.storageofinformation.mvp.presenters.base.BasePresenter;
 import com.kram.vlad.storageofinformation.mvp.view.SignUpView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by vlad on 13.11.2017.
@@ -29,14 +31,18 @@ public class SignUpPresenter extends BasePresenter<SignUpView.View> implements S
 
     @Override
     public void onAdd(Context context, SignUpModel signUpModel) {
-        if(Utils.isSQL){
-            mSQLiteHelper = new SQLiteHelper(context);
-            mSQLiteHelper.signUp(signUpModel);
+        if(!Objects.equals(signUpModel.getLogInModel().getEmail(), "")
+                && !Objects.equals(signUpModel.getLogInModel().getPassword(), "")) {
+            if (Utils.isSQL) {
+                mSQLiteHelper = new SQLiteHelper(context);
+                mSQLiteHelper.signUp(signUpModel);
+            } else {
+                mFirebaseHelper = new FirebaseHelper();
+                mFirebaseHelper.addNewUser(signUpModel);
+            }
         } else {
-            mFirebaseHelper = new FirebaseHelper();
-            mFirebaseHelper.addNewUser(signUpModel);
+            getView().showMessage(R.string.empty_password_message);
         }
-
         getView().next();
         getView().close();
     }

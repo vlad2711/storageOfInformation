@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">StorageOfInformation</string>
     <string name="wrong_password_message">Wrong email or password.</string>
+    <string name="empty_password_message">Empty email or password.</string>
+    <string name="firebase">Firebase</string>
+    <string name="sql">SQL</string>
 </resources>

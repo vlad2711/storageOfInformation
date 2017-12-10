@@ -3,7 +3,9 @@ package com.kram.vlad.storageofinformation.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.kram.vlad.storageofinformation.R;
+import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.SignUpPresenter;
@@ -23,13 +26,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SignUpView.View, CompoundButton.OnCheckedChangeListener{
+public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SignUpView.View{
 
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
     private SignUpPresenter mPresenter;
 
-    private boolean mIsSQL = true;
     private int mIslandId = 1;
 
     @BindView(R.id.name) EditText mName;
@@ -37,20 +39,19 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     @BindView(R.id.password_sign) EditText mPasswordSign;
     @BindView(R.id.sign_button) ImageView mSignButton;
     @BindView(R.id.log_button) ImageView mLogButton;
-    @BindView(R.id.spinner) Spinner mSpinner;
-    //@BindView(R.id.switchSQL) Switch mSwitch;
+    @BindView(R.id.toolbar5) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
 
         mPresenter = new SignUpPresenter();
         mPresenter.attachView(this);
         mPresenter.viewIsReady();
-
-        spinnerInit();
     }
 
     @OnClick({R.id.sign_button, R.id.log_button})
@@ -58,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         switch (view.getId()) {
             case R.id.sign_button:
                 mPresenter.onAdd(this, new SignUpModel(mName.getText().toString(),
-                        new LogInModel(mMailSign.getText().toString(),
+                        new LogInModel(Utils.EncodeEmail(mMailSign.getText().toString()),
                                 mPasswordSign.getText().toString()), mIslandId));
                 break;
             case R.id.log_button:
@@ -68,12 +69,24 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.switch_menu, menu);
-    //     mSwitch.setOnCheckedChangeListener(this);
-        return super.onCreateOptionsMenu(menu);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.sql:
+                Utils.isSQL = true;
+                break;
+            case R.id.firebase:
+                Utils.isSQL = false;
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.switch_menu, menu);
+        return true;
+    }
 
     @Override
     protected void onDestroy() {
@@ -82,18 +95,6 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         if (isFinishing()) {
             mPresenter.destroy();
         }
-    }
-
-    private void spinnerInit() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,
-                mPresenter.getSpinnerData(this));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        mSpinner.setAdapter(adapter);
-        mSpinner.setPrompt("Title");
-        mSpinner.setSelection(1);
-        mSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -142,10 +143,5 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void close() {
         finish();
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        mIsSQL = b;
     }
 }
