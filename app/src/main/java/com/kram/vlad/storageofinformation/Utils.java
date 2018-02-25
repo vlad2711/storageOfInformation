@@ -8,13 +8,15 @@ import java.util.ArrayList;
 
 public class Utils {
     public static ArrayList<String> sNotations = new ArrayList<>();
-    public static boolean isSQL = false;
+    public static int sCode = 2;
 
     public static String EncodeEmail(String string) {
-        return string.replace(".", ",");
+        if(sCode == Constants.FIREBASE_MODE)return string.replace(".", ",");
+        return string;
     }
 
     public static String DecodeEmail(String string) {
-        return string.replace(",", ".");
+        if (sCode == Constants.FIREBASE_MODE) return string.replace(",", ".");
+        return string;
     }
 }

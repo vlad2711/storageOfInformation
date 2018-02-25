@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.adapters.NotationRecyclerViewAdapter;
-import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallack;
+import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.NotationListPresenter;
 import com.kram.vlad.storageofinformation.mvp.view.NotationListView;
@@ -24,13 +24,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NotationListActivity extends AppCompatActivity implements NotationListView.View, NotationsDownloadedCallack {
+public class NotationListActivity extends AppCompatActivity implements NotationListView.View, NotationsDownloadedCallback {
 
     public static final String TAG = NotationListActivity.class.getSimpleName();
 
     private NotationRecyclerViewAdapter mNotationRecyclerViewAdapter;
     private LogInModel mLogInModel;
-    private NotationListPresenter mNotationListPresenter;
+    private  NotationListPresenter mNotationListPresenter;
 
     @BindView(R.id.toolbar4) Toolbar mToolbar;
     @BindView(R.id.floatingActionButton2) FloatingActionButton mFloatingActionButton;

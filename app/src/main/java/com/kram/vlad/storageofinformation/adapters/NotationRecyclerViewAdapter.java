@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
-import com.kram.vlad.storageofinformation.activitys.NotationListActivity;
-import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallack;
+import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
-import com.kram.vlad.storageofinformation.mvp.model.firebase.FirebaseHelper;
 import com.kram.vlad.storageofinformation.mvp.presenters.NotationListPresenter;
 
 import butterknife.BindView;
@@ -31,16 +29,16 @@ public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRe
     private Context mContext;
     private int mStartRange = 1;
     private int mFinishRange = 5;
-    private NotationsDownloadedCallack mNotationsDownloadedCallack;
+    private NotationsDownloadedCallback mNotationsDownloadedCallback;
     private NotationListPresenter mNotationListPresenter;
 
     public NotationRecyclerViewAdapter(Context context, LogInModel logInModel, int startRange, int finishRange,
-                                       NotationsDownloadedCallack notationsDownloadedCallack,
+                                       NotationsDownloadedCallback notationsDownloadedCallback,
                                        NotationListPresenter presenter) {
         mStartRange = startRange;
         mFinishRange = finishRange;
         mLogInModel = logInModel;
-        mNotationsDownloadedCallack = notationsDownloadedCallack;
+        mNotationsDownloadedCallback = notationsDownloadedCallback;
         mNotationListPresenter = presenter;
         mContext = context;
     }
@@ -61,7 +59,7 @@ public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRe
             Log.d(TAG, String.valueOf(mStartRange));
             Log.d(TAG, String.valueOf(mFinishRange));
             mNotationListPresenter.downloadNotations(mContext, mLogInModel,
-                    mNotationsDownloadedCallack, mStartRange, mFinishRange);
+                    mNotationsDownloadedCallback, mStartRange, mFinishRange);
         }
 
         holder.mNotations.setText(Utils.sNotations.get(position));

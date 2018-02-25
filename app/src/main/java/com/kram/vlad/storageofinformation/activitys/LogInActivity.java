@@ -12,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.models.LogInModel;
+import com.kram.vlad.storageofinformation.mvp.model.web.pojo.RESTModels;
 import com.kram.vlad.storageofinformation.mvp.presenters.LogInPresenter;
 import com.kram.vlad.storageofinformation.mvp.view.LogInView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,11 +69,15 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sql:
-                Utils.isSQL = true;
+                Utils.sCode = Constants.SQL_MODE;
                 break;
             case R.id.firebase:
-                Utils.isSQL = false;
+                Utils.sCode = Constants.FIREBASE_MODE;
                 break;
+            case R.id.rest:
+                Utils.sCode = Constants.REST_MODE;
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);

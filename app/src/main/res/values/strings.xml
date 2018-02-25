@@ -2,6 +2,9 @@
     <string name="app_name">StorageOfInformation</string>
     <string name="wrong_password_message">Wrong email or password.</string>
     <string name="empty_password_message">Empty email or password.</string>
+    <string name="account_already_exist">This account already exist</string>
+    <string name="error">ERROR</string>
     <string name="firebase">Firebase</string>
     <string name="sql">SQL</string>
+    <string name="rest">REST</string>
 </resources>

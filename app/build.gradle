@@ -1,8 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "com.kram.vlad.storageofinformation"
         minSdkVersion 19
@@ -27,6 +31,8 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.20"
+
     //Test
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -45,10 +51,17 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-database:11.6.2'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
 
     //Gson
     implementation 'org.immutables:gson:2.6.0.alpha0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
 }
 
 apply plugin: 'com.google.gms.google-services'
+repositories {
+    mavenCentral()
+}

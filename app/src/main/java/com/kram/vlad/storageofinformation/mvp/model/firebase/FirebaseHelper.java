@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.callbacks.LogInCallback;
 import com.kram.vlad.storageofinformation.callbacks.NotationCountCallback;
-import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallack;
+import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.models.NotationsModel;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
@@ -75,7 +75,7 @@ public class FirebaseHelper {
         });
     }
 
-    public void getDataInRange(LogInModel logInModel, NotationsDownloadedCallack notationsDownloadedCallack,
+    public void getDataInRange(LogInModel logInModel, NotationsDownloadedCallback notationsDownloadedCallack,
                                int startRange, int endRange){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("notations").child(logInModel.getEmail());

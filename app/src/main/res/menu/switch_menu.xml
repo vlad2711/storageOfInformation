@@ -6,4 +6,7 @@
     <item
         android:id="@+id/firebase"
         android:title="@string/firebase"/>
+    <item
+        android:id="@+id/rest"
+        android:title="@string/rest"/>
 </menu>

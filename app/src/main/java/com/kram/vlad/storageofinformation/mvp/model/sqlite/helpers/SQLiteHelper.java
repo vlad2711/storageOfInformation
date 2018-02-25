@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.kram.vlad.storageofinformation.Utils;
-import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallack;
+import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.models.NotationsModel;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
@@ -126,7 +126,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements IDatabaseHandler{
     }
 
     @Override
-    public void downloadNotations(LogInModel logInModel, NotationsDownloadedCallack notationsDownloadedCallack,
+    public void downloadNotations(LogInModel logInModel, NotationsDownloadedCallback notationsDownloadedCallack,
                                   int start, int finish) {
 
         SQLiteDatabase db = this.getWritableDatabase();

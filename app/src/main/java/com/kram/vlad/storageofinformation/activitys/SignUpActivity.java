@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.models.LogInModel;
@@ -72,11 +73,13 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sql:
-                Utils.isSQL = true;
+                Utils.sCode = Constants.SQL_MODE;
                 break;
             case R.id.firebase:
-                Utils.isSQL = false;
+                Utils.sCode = Constants.FIREBASE_MODE;
                 break;
+            case R.id.rest:
+                Utils.sCode = Constants.REST_MODE;
         }
 
         return super.onOptionsItemSelected(item);

@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 
@@ -45,21 +46,17 @@ public class SignUpTest {
 
     @Test
     public void testMenu() throws Exception{
-        onView(withId(R.id.sign_up_button)).perform(click());
-
-        Thread.sleep(START_NEW_ACTIVITY_WAITING_MILLIS);
-
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.sql)).perform(click());
-        Assert.assertTrue(Utils.isSQL);
+        Assert.assertTrue(Utils.sCode == Constants.SQL_MODE);
 
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.firebase)).perform(click());
-        Assert.assertFalse(Utils.isSQL);
+        Assert.assertTrue(Utils.sCode == Constants.FIREBASE_MODE);
 
-        onView(withId(R.id.log_button)).perform(click());
-        Thread.sleep(START_NEW_ACTIVITY_WAITING_MILLIS);
-
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.rest)).perform(click());
+        Assert.assertTrue(Utils.sCode == Constants.REST_MODE);
     }
 
     @Test
