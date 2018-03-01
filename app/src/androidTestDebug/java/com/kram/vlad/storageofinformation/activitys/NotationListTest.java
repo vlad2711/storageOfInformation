@@ -33,7 +33,7 @@ public class NotationListTest {
     public void addNotations() throws Exception {
         Log.d(TAG, "start add");
 
-        onView(withId(R.id.mail)).perform(typeText("vlad"));
+        onView(withId(R.id.mail)).perform(typeText("vlad@gmail.com"));
         onView(withId(R.id.password)).perform(typeText("1234"));
         onView(withId(R.id.login_button)).perform(click());
 
@@ -50,7 +50,7 @@ public class NotationListTest {
     @Test
     public void swipe() throws Exception {
 
-        onView(withId(R.id.mail)).perform(typeText("vlad"));
+        onView(withId(R.id.mail)).perform(typeText("vlad@gmail.com"));
         onView(withId(R.id.password)).perform(typeText("1234"));
         onView(withId(R.id.login_button)).perform(click());
 

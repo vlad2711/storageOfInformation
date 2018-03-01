@@ -28,8 +28,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 public class LogInActivityTest {
 
-    public static final int ACTIVITY_START_WAITING_MILLIS = 1000;
-    public static final int LOG_IN_WAITING_MILLIS = 3000;
+    private static final int ACTIVITY_START_WAITING_MILLIS = 1000;
+    private static final int LOG_IN_WAITING_MILLIS = 3000;
 
     @Rule
     public ActivityTestRule<LogInActivity> mActivityRule = new ActivityTestRule(LogInActivity.class);

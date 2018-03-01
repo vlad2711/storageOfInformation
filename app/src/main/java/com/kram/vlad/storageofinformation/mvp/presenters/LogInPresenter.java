@@ -35,26 +35,29 @@ public class LogInPresenter extends BasePresenter<LogInView.View> implements Log
 
     /**
      * Called when user try to login. Check user registration in database
-     * @param context of current Activity
      * @param logInModel use login data
      */
     @Override
     public void onLogIn(Context context, LogInModel logInModel) {
-        switch (Utils.sCode) { //get current database mode
-            case Constants.SQL_MODE:
-                LogInModel model = new SQLiteHelper(context).logIn(logInModel);
-                if (model != null) {
-                    getView().next();
-                } else {
-                    getView().showMessage(R.string.wrong_password_message);
-                }
-                break;
-            case Constants.FIREBASE_MODE:
-                new FirebaseHelper().getUser(logInModel, this);
-                break;
-            case Constants.REST_MODE:
-                LogInAPI.Factory.create().login(logInModel.getEmail(), logInModel.getPassword()).enqueue(this);
-                break;
+        if(!Objects.equals(logInModel.getEmail(), "") && !Objects.equals(logInModel.getPassword(), "")) {
+            switch (Utils.sCode) { //get current database mode
+                case Constants.SQL_MODE:
+                    LogInModel model = new SQLiteHelper(context).logIn(logInModel);
+                    if (model != null) {
+                        getView().next();
+                    } else {
+                        getView().showMessage(R.string.wrong_password_message);
+                    }
+                    break;
+                case Constants.FIREBASE_MODE:
+                    new FirebaseHelper().getUser(logInModel, this);
+                    break;
+                case Constants.REST_MODE:
+                    LogInAPI.Factory.create().login(logInModel.getEmail(), logInModel.getPassword()).enqueue(this);
+                    break;
+            }
+        } else {
+            getView().showMessage(R.string.empty_password_message);
         }
     }
 
@@ -98,6 +101,8 @@ public class LogInPresenter extends BasePresenter<LogInView.View> implements Log
         Log.d(TAG, String.valueOf(response));
         if(Objects.equals(response.body().getResult(), "OK")){
             onLogInDataDownload(response.body().getLogInModel());
+        } else {
+            getView().showMessage(R.string.wrong_password_message);
         }
     }
 

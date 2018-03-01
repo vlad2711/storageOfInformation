@@ -64,7 +64,7 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
                 mLogInPresenter.onLogIn(this, new LogInModel(Utils.EncodeEmail(mMail.getText().toString()), mPassword.getText().toString()));
                 break;
             case R.id.sign_up_button:
-                mLogInPresenter.onSignUp(this);
+                mLogInPresenter.onSignUp();
                 break;
         }
     }
