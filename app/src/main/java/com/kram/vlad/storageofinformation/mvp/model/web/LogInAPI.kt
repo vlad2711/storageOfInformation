@@ -10,6 +10,7 @@ import retrofit2.http.Query
 
 /**
  * Created by vlad on 10.02.2018.
+ * This interface check user registration in database by rest api
  */
 interface LogInAPI {
     @GET("/login")

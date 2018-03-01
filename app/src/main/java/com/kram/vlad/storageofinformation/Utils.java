@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by vlad on 07.11.17.
+ * App Utils
  */
 
 public class Utils {

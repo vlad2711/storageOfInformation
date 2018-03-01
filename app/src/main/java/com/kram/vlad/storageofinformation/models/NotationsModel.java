@@ -2,6 +2,7 @@ package com.kram.vlad.storageofinformation.models;
 
 /**
  * Created by vlad on 05.11.17.
+ * Notations data model
  */
 
 public class NotationsModel {
@@ -14,6 +15,11 @@ public class NotationsModel {
     }
 
 
+    /**
+     * @param logInModel login data
+     * @param notations notation text
+     * @param number id of notation
+     */
     public NotationsModel(LogInModel logInModel, String notations, long number) {
         mLogInModel = logInModel;
         mNotations = notations;

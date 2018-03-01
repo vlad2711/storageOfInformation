@@ -10,6 +10,7 @@ import retrofit2.http.Query
 
 /**
  * Created by vlad on 10.02.2018.
+ * This interface get notations from database by rest api
  */
 interface GetNotationsAPI {
     @GET("/get")

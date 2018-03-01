@@ -27,13 +27,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SignUpView.View{
+public class SignUpActivity extends AppCompatActivity implements SignUpView.View{
 
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
-    private SignUpPresenter mPresenter;
-
-    private int mIslandId = 1;
 
     @BindView(R.id.name) EditText mName;
     @BindView(R.id.mail_sign) EditText mMailSign;
@@ -41,6 +38,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     @BindView(R.id.sign_button) ImageView mSignButton;
     @BindView(R.id.log_button) ImageView mLogButton;
     @BindView(R.id.toolbar5) Toolbar mToolbar;
+
+    private SignUpPresenter mPresenter;//Current presenter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.sign_button:
                 mPresenter.onAdd(this, new SignUpModel(mName.getText().toString(),
                         new LogInModel(Utils.EncodeEmail(mMailSign.getText().toString()),
-                                mPasswordSign.getText().toString()), mIslandId));
+                                mPasswordSign.getText().toString())));
                 break;
             case R.id.log_button:
                 mPresenter.onLogIn();
@@ -85,12 +84,18 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Create menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.switch_menu, menu);
         return true;
     }
 
+    /**
+     * You must detach view and destroy presenter
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -100,32 +105,33 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-         mIslandId = i;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        mIslandId = 1;
-    }
-
-
+    /**
+     * @return user name from EditText
+     */
     @Override
     public String getTextName() {
         return mName.getText().toString();
     }
 
+    /**
+     * @return user email from EditText
+     */
     @Override
     public String getTextEmail() {
         return mMailSign.getText().toString();
     }
 
+    /**
+     * @return password from EditText
+     */
     @Override
     public String getTextPassword() {
         return mPasswordSign.getText().toString();
     }
 
+    /**
+     * Clear all EditTexts
+     */
     @Override
     public void clearAll() {
         mName.setText("");
@@ -133,16 +139,26 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         mPasswordSign.setText("");
     }
 
+    /**
+     * Show toast for user
+     * @param messageResId String resource id of message
+     */
     @Override
     public void showMessage(int messageResId) {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Start next activity(LogInActivity)
+     */
     @Override
     public void next() {
         startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
     }
 
+    /**
+     * Close current Activity
+     */
     @Override
     public void close() {
         finish();

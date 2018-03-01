@@ -9,6 +9,7 @@ import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 14.11.2017.
+ * View for NotationListActivity
  */
 
 public interface NotationListView {

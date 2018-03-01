@@ -2,6 +2,7 @@ package com.kram.vlad.storageofinformation.models;
 
 /**
  * Created by vlad on 23.10.17.
+ * Login data Model
  */
 
 public class LogInModel {

@@ -8,6 +8,7 @@ import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 13.11.2017.
+ * View for LogInActivity
  */
 
 public interface LogInView {
@@ -31,7 +32,7 @@ public interface LogInView {
 
     interface Presenter extends MvpPresenter<View> {
         void onLogIn(Context context, LogInModel logInModel);
-        void onSignUp(Context context);
+        void onSignUp();
         void checkLogin(Context context);
     }
 }

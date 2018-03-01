@@ -24,17 +24,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Started from LogInActivity when user log in. Show user notations
+ */
 public class NotationListActivity extends AppCompatActivity implements NotationListView.View, NotationsDownloadedCallback {
 
     public static final String TAG = NotationListActivity.class.getSimpleName();
 
-    private NotationRecyclerViewAdapter mNotationRecyclerViewAdapter;
-    private LogInModel mLogInModel;
-    private  NotationListPresenter mNotationListPresenter;
-
+    /** Views */
     @BindView(R.id.toolbar4) Toolbar mToolbar;
     @BindView(R.id.floatingActionButton2) FloatingActionButton mFloatingActionButton;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    /** Views */
+
+    private LogInModel mLogInModel; // Login data
+    private  NotationListPresenter mNotationListPresenter; //Current presenter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,30 +55,44 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
         initializeRecyclerView();
 
         Log.d(TAG, String.valueOf(mLogInModel));
-
     }
 
+    /**
+     * Presenter initializer
+     */
     private void presenterInit() {
-        mNotationListPresenter = new NotationListPresenter();
+        mNotationListPresenter = new NotationListPresenter(this);
         mNotationListPresenter.attachView(this);
         mNotationListPresenter.viewIsReady();
     }
 
+    /**
+     * Call when user click at log out button
+     */
     @OnClick(R.id.logOut)
     public void onLogOutClicked() {
         mNotationListPresenter.pushIsLoginToPreferences(this, false);
         close();
     }
 
+    /**
+     * Call when user want to add new notations
+     */
     @OnClick(R.id.floatingActionButton2)
     public void onActionButtonClicked() {
         next();
     }
 
+    /**
+     * Get LogIn data from previous activity
+     */
     public void getLogInModelFromIntent() {
         mLogInModel = mNotationListPresenter.getLogIn(getIntent(), this);
     }
 
+    /**
+     * You must detach view and destroy presenter
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -84,6 +102,9 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
         }
     }
 
+    /**
+     * Create next activity
+     */
     @Override
     public void next() {
         Intent i = new Intent(NotationListActivity.this, AddNotationsActivity.class);
@@ -93,22 +114,32 @@ public class NotationListActivity extends AppCompatActivity implements NotationL
         finish();
     }
 
+    /**
+     * Destroy current activity
+     */
     @Override
     public void close() {
         finish();
     }
 
+    /**
+     * Initialize list of notations
+     */
     private void initializeRecyclerView() {
         mNotationListPresenter.downloadNotations(this, mLogInModel, this, 1, 10);
-        mNotationRecyclerViewAdapter = new NotationRecyclerViewAdapter(this, mLogInModel,
+        NotationRecyclerViewAdapter notationRecyclerViewAdapter = new NotationRecyclerViewAdapter(this, mLogInModel,
                 1, 10, this,
                 mNotationListPresenter);
 
-        mRecyclerView.setAdapter(mNotationRecyclerViewAdapter);
+        mRecyclerView.setAdapter(notationRecyclerViewAdapter);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
     }
 
+    /**
+     * Callback called when app get notations from database.
+     * Update recyclerView
+     */
     @Override
     public void onNotationsDownLoaded() {
         mRecyclerView.getAdapter().notifyDataSetChanged();

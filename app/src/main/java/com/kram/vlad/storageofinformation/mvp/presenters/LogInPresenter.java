@@ -25,16 +25,22 @@ import retrofit2.Response;
 
 /**
  * Created by vlad on 13.11.2017.
+ * Presenter for LogInActivity
  */
 
 public class LogInPresenter extends BasePresenter<LogInView.View> implements LogInView.Presenter, LogInCallback,
         Callback<RESTModels.LogInModelResponse> {
 
-    public static final String TAG = LogInPresenter.class.getSimpleName();
+    private static final String TAG = LogInPresenter.class.getSimpleName();
 
+    /**
+     * Called when user try to login. Check user registration in database
+     * @param context of current Activity
+     * @param logInModel use login data
+     */
     @Override
     public void onLogIn(Context context, LogInModel logInModel) {
-        switch (Utils.sCode) {
+        switch (Utils.sCode) { //get current database mode
             case Constants.SQL_MODE:
                 LogInModel model = new SQLiteHelper(context).logIn(logInModel);
                 if (model != null) {
@@ -52,11 +58,18 @@ public class LogInPresenter extends BasePresenter<LogInView.View> implements Log
         }
     }
 
+    /**
+     * User want to open SignUpActivity
+     */
     @Override
-    public void onSignUp(Context context) {
+    public void onSignUp() {
         getView().openSignUp();
     }
 
+    /**
+     * Check is user already login
+     * @param context of current Activity
+     */
     @Override
     public void checkLogin(Context context) {
         if(new SharedPreferencesReader().getIsLoginFromSharedPreferences(context)){
@@ -64,6 +77,10 @@ public class LogInPresenter extends BasePresenter<LogInView.View> implements Log
         }
     }
 
+    /**
+     * Check user registration
+     * @param model user login data
+     */
     @Override
     public void onLogInDataDownload(LogInModel model) {
         if(model != null){
@@ -73,6 +90,9 @@ public class LogInPresenter extends BasePresenter<LogInView.View> implements Log
         }
     }
 
+    /**
+     * Check user registration in database by REST API
+     */
     @Override
     public void onResponse(@NonNull Call<RESTModels.LogInModelResponse> call, @NonNull Response<RESTModels.LogInModelResponse> response) {
         Log.d(TAG, String.valueOf(response));

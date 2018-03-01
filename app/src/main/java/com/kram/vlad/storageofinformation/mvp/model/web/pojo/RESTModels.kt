@@ -2,8 +2,10 @@ package com.kram.vlad.storageofinformation.mvp.model.web.pojo
 
 import com.kram.vlad.storageofinformation.models.SignUpModel
 import com.kram.vlad.storageofinformation.models.LogInModel
+
 /**
  * Created by vlad on 10.02.2018.
+ * Models for rest api
  */
 
 class RESTModels{

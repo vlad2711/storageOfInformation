@@ -10,6 +10,7 @@ import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 15.11.2017.
+ * View for AddNotationActivity
  */
 
 public interface AddNotationView {

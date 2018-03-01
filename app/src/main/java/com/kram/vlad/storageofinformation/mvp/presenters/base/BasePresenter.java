@@ -4,6 +4,7 @@ import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 /**
  * Created by vlad on 13.11.2017.
+ * Base for all presenters of app
  */
 
 public class BasePresenter <T extends MvpView> implements MvpPresenter<T> {

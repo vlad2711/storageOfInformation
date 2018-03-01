@@ -20,19 +20,28 @@ import java.util.Objects;
 
 /**
  * Created by vlad on 03.11.17.
+ * In this class you can see all work of app with Firebase Database
  */
 
 public class FirebaseHelper {
-    public static final String TAG = FirebaseHelper.class.getSimpleName();
+    private static final String TAG = FirebaseHelper.class.getSimpleName();
 
+    /**
+     * Add new user to Firebase Database
+     * @param signUpModel User data that must e added
+     */
     public void addNewUser(SignUpModel signUpModel){
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
 
         myRef.child(signUpModel.getLogInModel().getEmail()).setValue(signUpModel);
     }
 
+    /**
+     * Return count of Notations in database
+     * @param logInModel user login data
+     * @param notationCountCallback Callback, called when app get count of notations
+     */
     public void getNotationCount(LogInModel logInModel, NotationCountCallback notationCountCallback){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("notations").child(logInModel.getEmail());
@@ -40,7 +49,7 @@ public class FirebaseHelper {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                notationCountCallback.onNotationCount(dataSnapshot.getChildrenCount());
+                notationCountCallback.onNotationCount(dataSnapshot.getChildrenCount());//Data downloaded, call callback
             }
 
             @Override
@@ -48,8 +57,11 @@ public class FirebaseHelper {
         });
     }
 
-
-
+    /**
+     * Log in by Firebase Database
+     * @param logInModel user login data. In this function app compare it with logIn data from database
+     * @param logInCallback Callback, called when app compare logIn data from database with param logInModel
+     */
     public void getUser(LogInModel logInModel, LogInCallback logInCallback){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("users").child(logInModel.getEmail());
@@ -75,7 +87,14 @@ public class FirebaseHelper {
         });
     }
 
-    public void getDataInRange(LogInModel logInModel, NotationsDownloadedCallback notationsDownloadedCallack,
+    /**
+     * Return notations that id in range between startRange param and endRange param
+     * @param logInModel user login data
+     * @param notationsDownloadedCallback callback, called when notations downloaded from Firebase Database
+     * @param startRange first notation id
+     * @param endRange last notation id
+     */
+    public void getDataInRange(LogInModel logInModel, NotationsDownloadedCallback notationsDownloadedCallback,
                                int startRange, int endRange){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("notations").child(logInModel.getEmail());
@@ -94,7 +113,7 @@ public class FirebaseHelper {
                     Utils.sNotations.add(String.valueOf(postSnapshot.getValue()));
                 }
 
-                notationsDownloadedCallack.onNotationsDownLoaded();
+                notationsDownloadedCallback.onNotationsDownLoaded();
                 ref.removeEventListener(this);
                 ref.onDisconnect();
             }
@@ -106,6 +125,10 @@ public class FirebaseHelper {
         });
     }
 
+    /**
+     * Add new notation to database
+     * @param notationsModel notation data, that must be added
+     */
     public void addNotation(NotationsModel notationsModel){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("notations");

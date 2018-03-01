@@ -10,12 +10,13 @@ import retrofit2.http.Query
 
 /**
  * Created by vlad on 10.02.2018.
+ * This interface add notation to database by rest api
  */
 interface AddNotationsAPI {
     @GET("/add")
     fun addNotations (@Query("email" ) email: String,
                @Query("password") password: String,
-               @Query("notations") notations: String): Call<RESTModels.NotationAddResponse>
+               @Query("notation") notations: String): Call<RESTModels.NotationAddResponse>
 
     companion object Factory {
         fun create(): AddNotationsAPI {

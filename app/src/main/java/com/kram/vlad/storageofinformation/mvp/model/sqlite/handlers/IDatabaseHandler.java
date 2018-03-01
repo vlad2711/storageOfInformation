@@ -9,13 +9,12 @@ import java.util.ArrayList;
 
 /**
  * Created by vlad on 23.10.17.
+ * SQLite database handler
  */
 
 public interface IDatabaseHandler {
      void signUp(SignUpModel signUp);
-     void addNotations(LogInModel logInModel, NotationsModel notationsModel);
-     void initIsland(ArrayList<String> islands);
-     void downloadNotations(LogInModel logInModel, NotationsDownloadedCallback notationsDownloadedCallback,
-                            int start, int finish);
+     void addNotations(NotationsModel notationsModel);
+     void downloadNotations(LogInModel logInModel, int start, int finish);
      LogInModel logIn(LogInModel logIn);
 }

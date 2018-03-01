@@ -6,7 +6,6 @@ import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
-import com.kram.vlad.storageofinformation.mvp.model.files.AssetReader;
 import com.kram.vlad.storageofinformation.mvp.model.firebase.FirebaseHelper;
 import com.kram.vlad.storageofinformation.mvp.model.sqlite.helpers.SQLiteHelper;
 import com.kram.vlad.storageofinformation.mvp.model.web.SignUpAPI;
@@ -33,6 +32,10 @@ public class SignUpPresenter extends BasePresenter<SignUpView.View> implements S
 
     }
 
+    /**
+     * Add new user to database
+     * @param signUpModel user sign up data
+     */
     @Override
     public void onAdd(Context context, SignUpModel signUpModel) {
         if(!Objects.equals(signUpModel.getLogInModel().getEmail(), "")
@@ -58,17 +61,19 @@ public class SignUpPresenter extends BasePresenter<SignUpView.View> implements S
         getView().close();
     }
 
+    /**
+     * User want to open LogInActivity
+     */
     @Override
     public void onLogIn() {
         getView().next();
         getView().close();
     }
 
-    @Override
-    public ArrayList<String> getSpinnerData(Context context) {
-        return new AssetReader().getIslandArrayList(context);
-    }
 
+    /**
+     * Add new user by REST API
+     */
     @Override
     public void onResponse(Call<RESTModels.SignUpModelResponse> call, Response<RESTModels.SignUpModelResponse> response) {
         if(Objects.equals(response.body().getResult(), "OK")){

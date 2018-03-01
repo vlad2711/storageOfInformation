@@ -26,18 +26,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
+/**
+ * MainActivity, also called from SignUpActivity
+ */
 public class LogInActivity extends AppCompatActivity implements LogInView.View {
 
     public static final String TAG = LogInActivity.class.getSimpleName();
 
-    private LogInPresenter mLogInPresenter;
-
+    /** Views*/
     @BindView(R.id.toolbar3) Toolbar mToolbar;
     @BindView(R.id.mail) EditText mMail;
     @BindView(R.id.password) EditText mPassword;
     @BindView(R.id.login_button) ImageView mLoginButton;
     @BindView(R.id.sign_up_button) ImageView mSignUpButton;
+    /** Views*/
+
+    private LogInPresenter mLogInPresenter;//Current presenter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,9 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
         }
     }
 
+    /**
+     * Set data source
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -79,7 +86,6 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
                 break;
 
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -89,27 +95,43 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
         return true;
     }
 
+    /**
+     * @return text from email EditText
+     */
     @Override
     public String getTextEmail() {
-        return null;
+        return String.valueOf(mMail.getText());
     }
 
+    /**
+     * @return text from password EditText
+     */
     @Override
     public String getTextPassword() {
-        return null;
+        return String.valueOf(mPassword.getText());
     }
 
+    /**
+     * clear all editTexts
+     */
     @Override
     public void clearAll() {
         mMail.setText("");
         mPassword.setText("");
     }
 
+    /**
+     * Show toast for user
+     * @param messageResId String resource id of message
+     */
     @Override
     public void showMessage(int messageResId) {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * You must detach view and destroy presenter
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -119,11 +141,17 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
         }
     }
 
+    /**
+     * open SignUpActivity when user click button
+     */
     @Override
     public void openSignUp() {
         startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
     }
 
+    /**
+     * Open next Activity(NotationListActivity) and put login data
+     */
     @Override
     public void next() {
         Intent i = new Intent(LogInActivity.this, NotationListActivity.class);
@@ -131,12 +159,18 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
         startActivity(i);
     }
 
+    /**
+     * If user already login - login data stored at SharedPreferences and we just start next Activity(NotationListActivity)
+     */
     @Override
     public void nextFromPreferences() {
         Intent i = new Intent(LogInActivity.this, NotationListActivity.class);
         startActivity(i);
     }
 
+    /**
+     * Close current Activity
+     */
     @Override
     public void close() {
         finish();

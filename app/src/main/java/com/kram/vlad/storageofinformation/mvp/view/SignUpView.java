@@ -8,6 +8,10 @@ import com.kram.vlad.storageofinformation.mvp.view.base.MvpView;
 
 import java.util.ArrayList;
 
+/**
+ * Created by vlad on 14.11.2017.
+ * View for SignUpActivty
+ */
 public interface SignUpView {
 
     interface View extends MvpView {
@@ -29,6 +33,5 @@ public interface SignUpView {
     interface Presenter extends MvpPresenter<View> {
         void onAdd(Context context, SignUpModel signUpModel);
         void onLogIn();
-        ArrayList<String> getSpinnerData(Context context);
-    }
+     }
 }

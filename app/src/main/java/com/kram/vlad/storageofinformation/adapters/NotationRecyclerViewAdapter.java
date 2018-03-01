@@ -23,15 +23,25 @@ import butterknife.ButterKnife;
 
 public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRecyclerViewAdapter.CardViewHolder>{
 
-    public static final String TAG = NotationRecyclerViewAdapter.class.getSimpleName();
-    private LogInModel mLogInModel;
+    private static final String TAG = NotationRecyclerViewAdapter.class.getSimpleName();
 
+    /** This variables initialized at constructor**/
+    private LogInModel mLogInModel;
     private Context mContext;
     private int mStartRange = 1;
     private int mFinishRange = 5;
     private NotationsDownloadedCallback mNotationsDownloadedCallback;
     private NotationListPresenter mNotationListPresenter;
 
+
+    /**
+     * @param context context of current Activity. App use it to get SQLite table
+     * @param logInModel logIn data(Email, password)
+     * @param startRange List show notations items from this value
+     * @param finishRange List show notations items to this value
+     * @param notationsDownloadedCallback Callback called when new notations downloaded
+     * @param presenter presenter of current Activity
+     */
     public NotationRecyclerViewAdapter(Context context, LogInModel logInModel, int startRange, int finishRange,
                                        NotationsDownloadedCallback notationsDownloadedCallback,
                                        NotationListPresenter presenter) {
@@ -50,6 +60,11 @@ public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRe
                 .inflate(R.layout.item, parent, false));
     }
 
+    /**
+     * Update items and check when download new notations
+     * @param holder current holder
+     * @param position current item position
+     */
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         if(position + 1 >= Utils.sNotations.size()){
@@ -65,11 +80,17 @@ public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRe
         holder.mNotations.setText(Utils.sNotations.get(position));
     }
 
+    /**
+     * @return size of list
+     */
     @Override
     public int getItemCount() {
         return Utils.sNotations.size();
     }
 
+    /**
+     * Holder for NotationRecyclerViewAdapter
+     */
     class CardViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.notation) TextView mNotations;
 
@@ -78,5 +99,4 @@ public class NotationRecyclerViewAdapter extends RecyclerView.Adapter<NotationRe
             ButterKnife.bind(this, itemView);
         }
     }
-
 }
