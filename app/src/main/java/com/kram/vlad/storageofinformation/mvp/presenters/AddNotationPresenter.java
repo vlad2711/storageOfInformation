@@ -2,6 +2,7 @@ package com.kram.vlad.storageofinformation.mvp.presenters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
@@ -28,7 +29,7 @@ import retrofit2.Response;
  */
 
 public class AddNotationPresenter extends BasePresenter<AddNotationView.View> implements AddNotationView.Presenter, Callback<RESTModels.NotationAddResponse> {
-
+    public static final String TAG = AddNotationPresenter.class.getSimpleName();
     /**
      * This function add notation to database
      * @param context of current Activity
@@ -39,17 +40,20 @@ public class AddNotationPresenter extends BasePresenter<AddNotationView.View> im
         switch (Utils.sCode){ // get database mode
             case Constants.FIREBASE_MODE:
                 new FirebaseHelper().addNotation(notationsModel);
+                getView().next();
+                getView().close();
                 break;
             case Constants.SQL_MODE:
                 new SQLiteHelper(context).addNotations(notationsModel);
+                getView().next();
+                getView().close();
                 break;
             case Constants.REST_MODE:
                 AddNotationsAPI.Factory.create().addNotations(notationsModel.getLogInModel().getEmail(),
                         notationsModel.getLogInModel().getPassword(),
                         notationsModel.getNotations()).enqueue(this);
         }
-        getView().next();
-        getView().close();
+
     }
 
     /**
@@ -67,7 +71,13 @@ public class AddNotationPresenter extends BasePresenter<AddNotationView.View> im
      */
     @Override
     public void onResponse(@NonNull Call<RESTModels.NotationAddResponse> call, @NonNull Response<RESTModels.NotationAddResponse> response) {
-        if(!Objects.equals("OK", response.body().getResult())) getView().showMessage(R.string.error); //if user not registered show error message
+        Log.d(TAG, response.body().getResult());
+        if(!Objects.equals("OK", response.body().getResult())) {
+            getView().showMessage(R.string.error);//show error message
+        } else {
+            getView().next();
+            getView().close();
+        }
     }
 
     @Override

@@ -74,7 +74,8 @@ public class NotationListPresenter extends BasePresenter<NotationListView.View> 
                 new FirebaseHelper().getDataInRange(logInModel, notationsDownloadedCallback, start, end);
                 break;
             case Constants.REST_MODE:
-                GetNotationsAPI.Factory.create().getNotations(logInModel.getEmail(), logInModel.getPassword(), start, end).enqueue(this);
+                Log.d(TAG, start + " " + end);
+                GetNotationsAPI.Factory.create().getNotations(logInModel.getEmail(), logInModel.getPassword(), 0, 10).enqueue(this);
                 break;
         }
     }
@@ -111,9 +112,13 @@ public class NotationListPresenter extends BasePresenter<NotationListView.View> 
      */
     @Override
     public void onResponse(@NonNull Call<RESTModels.NotationResponse> call, @NonNull Response<RESTModels.NotationResponse> response) {
+
         for (int i = 0; i < response.body().getResponse().size(); i++) {
-            Utils.sNotations.add(response.body().getResponse().get(i).getNotation());
-            Log.d(TAG, String.valueOf(response.body().getResponse().size()));
+            if(response.body().getResponse().get(i).getId() < Utils.sNotations.size()) {
+                Utils.sNotations.set(response.body().getResponse().get(i).getId(), response.body().getResponse().get(i).getNotation());
+            } else {
+                Utils.sNotations.add(response.body().getResponse().get(i).getNotation());
+            }
         }
 
         notationsDownloadedCallback.onNotationsDownLoaded();
