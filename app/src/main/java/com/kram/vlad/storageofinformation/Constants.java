@@ -12,4 +12,5 @@ public class Constants {
     public static final int SQL_MODE = 0;
     public static final int FIREBASE_MODE = 1;
     public static final int REST_MODE = 2;
+    public static final int COUNT_OF_MENU_ITEMS = 3;
 }

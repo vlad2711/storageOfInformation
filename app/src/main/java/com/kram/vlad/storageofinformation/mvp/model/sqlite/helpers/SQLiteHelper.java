@@ -69,7 +69,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements IDatabaseHandler{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_REGISTRATION + "("
                 + KEY_EMAIL + " TEXT," + KEY_PASSWORD + " TEXT,"
-                + KEY_NAME + " TEXT," + ")";
+                + KEY_NAME + " TEXT" + ")";
         sqLiteDatabase.execSQL(CREATE_REGISTRATION_TABLE);
 
         String CREATE_NOTATION_TABLE = "CREATE TABLE " + TABLE_NOTATIONS + "(" +

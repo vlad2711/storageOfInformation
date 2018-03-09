@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
+import com.kram.vlad.storageofinformation.activitys.base.BaseActivity;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.mvp.model.web.pojo.RESTModels;
 import com.kram.vlad.storageofinformation.mvp.presenters.LogInPresenter;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
 /**
  * MainActivity, also called from SignUpActivity
  */
-public class LogInActivity extends AppCompatActivity implements LogInView.View {
+public class LogInActivity extends BaseActivity implements LogInView.View {
 
     public static final String TAG = LogInActivity.class.getSimpleName();
 
@@ -69,31 +70,6 @@ public class LogInActivity extends AppCompatActivity implements LogInView.View {
         }
     }
 
-    /**
-     * Set data source
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.sql:
-                Utils.sCode = Constants.SQL_MODE;
-                break;
-            case R.id.firebase:
-                Utils.sCode = Constants.FIREBASE_MODE;
-                break;
-            case R.id.rest:
-                Utils.sCode = Constants.REST_MODE;
-                break;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.switch_menu, menu);
-        return true;
-    }
 
     /**
      * @return text from email EditText

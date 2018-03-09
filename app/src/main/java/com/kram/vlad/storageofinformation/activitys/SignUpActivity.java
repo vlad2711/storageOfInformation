@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.kram.vlad.storageofinformation.Constants;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
+import com.kram.vlad.storageofinformation.activitys.base.BaseActivity;
 import com.kram.vlad.storageofinformation.models.LogInModel;
 import com.kram.vlad.storageofinformation.models.SignUpModel;
 import com.kram.vlad.storageofinformation.mvp.presenters.SignUpPresenter;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends AppCompatActivity implements SignUpView.View{
+public class SignUpActivity extends BaseActivity implements SignUpView.View{
 
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
@@ -68,30 +69,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView.View
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.sql:
-                Utils.sCode = Constants.SQL_MODE;
-                break;
-            case R.id.firebase:
-                Utils.sCode = Constants.FIREBASE_MODE;
-                break;
-            case R.id.rest:
-                Utils.sCode = Constants.REST_MODE;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Create menu
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.switch_menu, menu);
-        return true;
-    }
 
     /**
      * You must detach view and destroy presenter

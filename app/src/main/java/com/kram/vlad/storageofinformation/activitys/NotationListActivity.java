@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.kram.vlad.storageofinformation.R;
 import com.kram.vlad.storageofinformation.Utils;
+import com.kram.vlad.storageofinformation.activitys.base.BaseActivity;
 import com.kram.vlad.storageofinformation.adapters.NotationRecyclerViewAdapter;
 import com.kram.vlad.storageofinformation.callbacks.NotationsDownloadedCallback;
 import com.kram.vlad.storageofinformation.models.LogInModel;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
 /**
  * Started from LogInActivity when user log in. Show user notations
  */
-public class NotationListActivity extends AppCompatActivity implements NotationListView.View, NotationsDownloadedCallback {
+public class NotationListActivity extends BaseActivity implements NotationListView.View, NotationsDownloadedCallback {
 
     public static final String TAG = NotationListActivity.class.getSimpleName();
 

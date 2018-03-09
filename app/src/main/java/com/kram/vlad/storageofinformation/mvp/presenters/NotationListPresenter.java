@@ -113,15 +113,17 @@ public class NotationListPresenter extends BasePresenter<NotationListView.View> 
     @Override
     public void onResponse(@NonNull Call<RESTModels.NotationResponse> call, @NonNull Response<RESTModels.NotationResponse> response) {
 
-        for (int i = 0; i < response.body().getResponse().size(); i++) {
-            if(response.body().getResponse().get(i).getId() < Utils.sNotations.size()) {
-                Utils.sNotations.set(response.body().getResponse().get(i).getId(), response.body().getResponse().get(i).getNotation());
-            } else {
-                Utils.sNotations.add(response.body().getResponse().get(i).getNotation());
+        if(response.body() != null) {
+            for (int i = 0; i < response.body().getResponse().size(); i++) {
+                if (response.body().getResponse().get(i).getId() < Utils.sNotations.size()) {
+                    Utils.sNotations.set(response.body().getResponse().get(i).getId(), response.body().getResponse().get(i).getNotation());
+                } else {
+                    Utils.sNotations.add(response.body().getResponse().get(i).getNotation());
+                }
             }
-        }
 
-        notationsDownloadedCallback.onNotationsDownLoaded();
+            notationsDownloadedCallback.onNotationsDownLoaded();
+        }
     }
 
     @Override
